@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
 using SocketIO;
@@ -33,6 +34,15 @@ public class CommandServer : MonoBehaviour
 		Debug.Log("Connection Open");
 		EmitTelemetry(obj);
 	}
+
+    void onReset(SocketIOEvent obj)
+    {
+        Debug.Log("Reset Scene");
+        _socket.Emit("reset", new JSONObject());
+
+        string currentScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentScene);
+    }
 
 	// 
 	void onManual(SocketIOEvent obj)
