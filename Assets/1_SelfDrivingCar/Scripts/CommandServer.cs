@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
 using SocketIO;
@@ -19,8 +20,9 @@ public class CommandServer : MonoBehaviour
 		_socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
 		_socket.On("open", OnOpen);
 		_socket.On("steer", OnSteer);
-		_socket.On("manual", onManual);
-		_carController = CarRemoteControl.GetComponent<CarController>();
+        _socket.On("manual", onManual);
+        _socket.On("reset", onManual);
+        _carController = CarRemoteControl.GetComponent<CarController>();
 	}
 
 	// Update is called once per frame
@@ -33,6 +35,14 @@ public class CommandServer : MonoBehaviour
 		Debug.Log("Connection Open");
 		EmitTelemetry(obj);
 	}
+
+    void OnReset(SocketIOEvent obj)
+    {
+        Debug.Log("Scene Reset");
+        string currentScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentScene);
+        EmitTelemetry(obj);
+    }
 
 	// 
 	void onManual(SocketIOEvent obj)
