@@ -20,8 +20,9 @@ public class CommandServer : MonoBehaviour
 		_socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
 		_socket.On("open", OnOpen);
 		_socket.On("steer", OnSteer);
-		_socket.On("manual", onManual);
-		_carController = CarRemoteControl.GetComponent<CarController>();
+        _socket.On("manual", OnManual);
+        _socket.On("reset", OnReset);
+        _carController = CarRemoteControl.GetComponent<CarController>();
 	}
 
 	// Update is called once per frame
@@ -35,7 +36,7 @@ public class CommandServer : MonoBehaviour
 		EmitTelemetry(obj);
 	}
 
-    void onReset(SocketIOEvent obj)
+    void OnReset(SocketIOEvent obj)
     {
         Debug.Log("Reset Scene");
         _socket.Emit("reset", new JSONObject());
@@ -45,7 +46,7 @@ public class CommandServer : MonoBehaviour
     }
 
 	// 
-	void onManual(SocketIOEvent obj)
+	void OnManual(SocketIOEvent obj)
 	{
 		EmitTelemetry (obj);
 	}
