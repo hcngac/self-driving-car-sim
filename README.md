@@ -4,6 +4,9 @@ This simulator was built for [Udacity's Self-Driving Car Nanodegree](https://uda
 
 All the assets in this repository require Unity. Please follow the instructions below for the full setup.
 
+### Changes to adapt to the project:
+- Home button -> reset current scene
+
 ### Avaliable Game Builds (Precompiled builds of the simulator)
 
 Instructions: Download the zip file, extract it and run the executable file.
