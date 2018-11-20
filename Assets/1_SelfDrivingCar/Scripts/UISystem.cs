@@ -133,13 +133,6 @@ public class UISystem : MonoSingleton<UISystem> {
             //Do Console Here
         }
 
-        if (Input.GetKeyDown(KeyCode.Home))
-        {
-            //Do Reset Here
-            string currentScene = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(currentScene);
-        }
-
         UpdateCarValues();
     }
 }
